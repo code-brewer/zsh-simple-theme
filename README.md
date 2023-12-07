@@ -4,7 +4,7 @@
 
 This is an oh-my-zsh theme with informative git status, venv/Anaconda environment info and command execution time.
 
-![demo.png](./readme/demo.png)
+
 
 ### Features
 
