@@ -1,4 +1,4 @@
-# simplerich-zsh-theme
+# zsh-simple-theme
 
 ## Overview
 
@@ -41,8 +41,8 @@ The git status is updated immediately after a command is finished or every 10 se
 
 ```shell
 # cd path/to/where_u_want_to_clone_the_repo
-git clone --recursive https://github.com/philip82148/simplerich-zsh-theme
-cp ./simplerich-zsh-theme/simplerich.zsh-theme ~/.oh-my-zsh/themes/
+git clone --recursive https://github.com/code-brewer/zsh-simple-theme
+cp ./zsh-simple-theme/simplerich.zsh-theme ~/.oh-my-zsh/themes/
 ```
 
 2. Edit ~/.zshrc.
@@ -51,7 +51,7 @@ cp ./simplerich-zsh-theme/simplerich.zsh-theme ~/.oh-my-zsh/themes/
 # file:~/.zshrc
 # Find the line that reads ZSH_THEME="..." and replace it with the followings.
 ZSH_THEME="simplerich"
-source path/to/where_u_want_to_clone_the_repo/simplerich-zsh-theme/zsh-git-prompt/zshrc.sh
+source path/to/where_u_want_to_clone_the_repo/zsh-simple-theme/zsh-git-prompt/zshrc.sh
 ```
 
 **Attention**
