@@ -6,6 +6,11 @@ This is an oh-my-zsh theme with informative git status, venv/Anaconda environmen
 
 ![demo.png](./readme/demo.png)
 
+Show time cost when it run longer than 1 second ( You can change this threshold by edit theme script)
+
+![costline.png](./readme/show_cost_line_or_not.png)
+
+
 ### Features
 
 You can see the followings at once:

@@ -12,7 +12,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     }
 fi
 
-
+# return value in second unit,  example: '1702020768.012',
 _simplerich_current_time_millis() {
     local time_millis
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -47,6 +47,11 @@ get_cur_folder_name() {
 get_end_mark() {
     echo "$fg_bold[green] <== END"  # OK
     #echo "<== END"
+}
+
+#return -1, 0, 1
+cmp() {
+   awk -v n1="$1" -v n2="$2" 'BEGIN {print (n1<n2?"-1":n1==n2?"0":"1")}'
 }
 
 _simplerich_update_git_info() {
@@ -119,16 +124,28 @@ precmd() { # cspell:disable-line
         local time_end="$(_simplerich_current_time_millis)"
         local cost=$(bc -l <<<"${time_end}-${_SIMPLERICH_COMMAND_TIME_BEGIN}")
         _SIMPLERICH_COMMAND_TIME_BEGIN="-20200325"
+
+        local threshold=1  # print if cost time greater than 1 second
+        local _print_cost_line=false
+        local _cmpResult=$(cmp $cost $threshold)
+        if [ "$_cmpResult" = "1" ]; then
+            _print_cost_line=true
+        fi
+
         local length_cost=${#cost}
         if [ "$length_cost" = "4" ]; then
             cost="0${cost}"
         fi
-        cost="[cost ${cost}s]"
+        cost="[ cost ${cost}s (show when longer than ${threshold} second) ]"
 
         echo "$fg_bold[green]└─>${color_reset}"  # newline
-        #echo "${time} $fg[cyan]${cost}${color_reset} ${cmd} $(get_end_mark) "
-        # don't echo last 'cmd' and end mark
-        echo "${time} $fg[cyan]${cost}${color_reset} "
+
+        if  $_print_cost_line; then
+            #echo "${time} $fg[cyan]${cost}${color_reset} ${cmd} $(get_end_mark) "
+            # don't echo last 'cmd' and end mark
+            echo "${time} $fg[cyan]${cost}${color_reset} "
+        fi
+
         #echo "$fg_bold[green]└─>"  # newline
     }
 
